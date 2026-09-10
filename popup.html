@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp Task Tracker</title>
+  <link rel="stylesheet" href="popup.css">
+  <script type="module" src="popup.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-mark" aria-hidden="true">✓</div>
+    <div><h1>Chat to task</h1><p>A little follow-through.</p></div>
+    <span class="local-label">LOCAL ONLY</span>
+  </header>
+
+  <main>
+    <section class="capture-panel" aria-labelledby="capture-heading">
+      <div class="section-heading">
+        <h2 id="capture-heading">From your conversation</h2>
+        <span id="connection-dot" class="connection-dot" aria-hidden="true"></span>
+      </div>
+      <p id="chat-status" class="muted" role="status">Checking WhatsApp...</p>
+      <div class="capture-controls">
+        <label for="message-count">Last <input id="message-count" type="number" min="1" max="50" value="5" required> messages</label>
+        <button id="capture" type="button" class="primary" disabled>Capture messages</button>
+      </div>
+      <p class="hint">Uses messages currently loaded in the chat. Scroll to the bottom first for the latest.</p>
+    </section>
+
+    <p id="error" class="error" role="alert" hidden></p>
+    <p id="notice" class="notice" role="status" hidden></p>
+
+    <form id="task-form" hidden>
+      <div class="section-heading">
+        <h2>A small promise to yourself</h2>
+        <button id="cancel" type="button" class="text-button">Cancel</button>
+      </div>
+      <details class="context-preview">
+        <summary id="preview-summary">Captured messages</summary>
+        <ol id="preview-messages" class="messages"></ol>
+      </details>
+      <label for="task-title">Task name <span class="optional">optional</span></label>
+      <input id="task-title" type="text" maxlength="160" placeholder="e.g. Send the project estimate">
+      <div class="form-row">
+        <div><label for="deadline">Deadline <span class="optional">optional</span></label><input id="deadline" type="datetime-local"></div>
+        <div><label for="urgency">Urgency <span class="optional">optional</span></label>
+          <select id="urgency">
+            <option value="">None</option><option value="low">Low</option><option value="normal">Normal</option><option value="high">High</option>
+          </select>
+        </div>
+      </div>
+      <button id="save" type="submit" class="primary full-width">Save task</button>
+    </form>
+
+    <section class="tasks-section" aria-labelledby="tasks-heading">
+      <div class="section-heading">
+        <h2 id="tasks-heading">Your tasks <span id="task-count" class="count">0</span></h2>
+        <label class="show-completed"><input id="show-completed" type="checkbox"> Show done</label>
+      </div>
+      <div id="tasks"></div>
+      <div id="empty" class="empty" hidden>
+        <div class="empty-mark" aria-hidden="true">✓</div>
+        <h3>Nothing to keep in your head.</h3>
+        <p>Open a WhatsApp conversation and capture<br>a few messages to make your first task.</p>
+      </div>
+    </section>
+  </main>
+  <footer>Saved on this device. Your conversations stay yours.</footer>
+</body>
+</html>
